@@ -181,5 +181,22 @@ describe('MetricsTracker', () => {
       tracker.setTPS(42.0);
       expect(tracker.getMetrics().tps).toBe(42.0);
     });
+
+    it('manually set TPS persists across addTokens calls', () => {
+      tracker.setTPS(42.0);
+      tracker.addTokens(5);
+      expect(tracker.getMetrics().tps).toBe(42.0);
+    });
+
+    it('includes all window records in TPS calculation', async () => {
+      // Add a large first batch, then a small second batch
+      tracker.addTokens(100);
+      await new Promise((r) => setTimeout(r, 100));
+      tracker.addTokens(1);
+      const tps = tracker.getMetrics().tps;
+      // All 101 tokens over ~100ms → ~1010 tok/s
+      // Previously the first record was subtracted, giving only 1/0.1 = 10 tok/s
+      expect(tps).toBeGreaterThan(200);
+    });
   });
 });

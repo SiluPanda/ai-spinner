@@ -161,6 +161,7 @@ class AISpinnerImpl implements AISpinner {
     this._state = 'waiting';
     this._metrics.startTimer();
     this._startRenderLoop();
+    this._removeCleanupHandlers();
     this._registerCleanupHandlers();
 
     if (this._isTTY) {
