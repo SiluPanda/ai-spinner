@@ -3,6 +3,7 @@
 AI-aware terminal progress indicators with token counts, cost display, streaming throughput, and multi-step pipeline status.
 
 [![npm version](https://img.shields.io/npm/v/ai-spinner.svg)](https://www.npmjs.com/package/ai-spinner)
+[![npm downloads](https://img.shields.io/npm/dt/ai-spinner.svg)](https://www.npmjs.com/package/ai-spinner)
 [![license](https://img.shields.io/npm/l/ai-spinner.svg)](https://github.com/SiluPanda/ai-spinner/blob/master/LICENSE)
 [![node](https://img.shields.io/node/v/ai-spinner.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
