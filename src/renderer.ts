@@ -92,7 +92,7 @@ export function buildTemplateValues(opts: {
     values.elapsed = formatElapsed(metrics.elapsedMs);
   }
 
-  if (opts.tokenBudget && metrics.outputTokens > 0) {
+  if (opts.tokenBudget && metrics.outputTokens > 0 && !values.tokens) {
     values.budget = `${metrics.outputTokens.toLocaleString('en-US')}/${opts.tokenBudget.toLocaleString('en-US')}`;
   }
 

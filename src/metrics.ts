@@ -43,7 +43,6 @@ export class MetricsTracker {
    */
   addTokens(count: number = 1): void {
     this._outputTokens += count;
-    this._tpsManuallySet = false;
 
     const now = performance.now();
     this._window.push({ timestamp: now, count });
@@ -182,9 +181,7 @@ export class MetricsTracker {
     if (timeSpanMs <= 0) return 0;
 
     const totalTokens = this._window.reduce((sum, r) => sum + r.count, 0);
-    // Subtract first record's count from total since it represents the boundary
-    const windowTokens = totalTokens - first.count;
     const timeSpanSeconds = timeSpanMs / 1000;
-    return windowTokens / timeSpanSeconds;
+    return totalTokens / timeSpanSeconds;
   }
 }

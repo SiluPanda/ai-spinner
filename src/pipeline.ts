@@ -7,7 +7,7 @@ import type {
 } from './types';
 import { isTTY, supportsColor, getColumns } from './terminal';
 import { getPreset, isPresetName } from './presets';
-import { formatElapsed } from './format';
+import { formatElapsed, formatCost } from './format';
 import {
   colorize,
   stripAnsi,
@@ -299,7 +299,7 @@ class AIPipelineImpl implements AIPipeline {
           parts.push(`${step.tps.toFixed(1)} tok/s`);
         }
         if (step.cost !== undefined && step.cost > 0) {
-          parts.push(`$${step.cost.toFixed(3)}`);
+          parts.push(formatCost(step.cost));
         }
         status = parts.join(' \u00b7 ');
         break;
