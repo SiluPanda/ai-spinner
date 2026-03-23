@@ -11,7 +11,7 @@ This file contains all tasks required to implement `ai-spinner` as described in 
 - [x] **Configure Vitest** — Create a `vitest.config.ts` if needed or verify that `vitest run` works with the existing `tsconfig.json`. Ensure `npm run test` executes correctly (even with zero tests). | Status: done
 - [x] **Verify build pipeline** — Run `npm run build` and confirm `tsc` compiles `src/index.ts` into `dist/index.js` with declarations. Fix any tsconfig issues. | Status: done
 - [x] **Create source file skeleton** — Create all source files specified in the file structure: `src/types.ts`, `src/presets.ts`, `src/terminal.ts`, `src/format.ts`, `src/renderer.ts`, `src/metrics.ts`, `src/pricing.ts`, `src/spinner.ts`, `src/stream.ts`, `src/pipeline.ts`. Each file starts with a minimal placeholder export. | Status: done
-- [ ] **Create test file skeleton** — Create all test files: `src/__tests__/spinner.test.ts`, `src/__tests__/metrics.test.ts`, `src/__tests__/stream.test.ts`, `src/__tests__/pipeline.test.ts`, `src/__tests__/renderer.test.ts`, `src/__tests__/format.test.ts`, `src/__tests__/pricing.test.ts`, `src/__tests__/terminal.test.ts`, `src/__tests__/integration.test.ts`. Each file starts with a single placeholder test. | Status: not_done
+- [x] **Create test file skeleton** — Create all test files: `src/__tests__/spinner.test.ts`, `src/__tests__/metrics.test.ts`, `src/__tests__/stream.test.ts`, `src/__tests__/pipeline.test.ts`, `src/__tests__/renderer.test.ts`, `src/__tests__/format.test.ts`, `src/__tests__/pricing.test.ts`, `src/__tests__/terminal.test.ts`, `src/__tests__/integration.test.ts`. Each file starts with a single placeholder test. | Status: done
 
 ---
 
@@ -50,7 +50,7 @@ This file contains all tasks required to implement `ai-spinner` as described in 
 - [x] **Implement color support detection** — Create `supportsColor(stream: NodeJS.WritableStream, colorOption?: boolean): boolean` implementing the priority chain: explicit option > `FORCE_COLOR` > `NO_COLOR` > `stream.hasColors()` > `stream.isTTY` > false. | Status: done
 - [x] **Implement terminal width reading** — Create `getColumns(stream: NodeJS.WritableStream): number` that reads `stream.columns` with a sensible fallback (e.g., 80). | Status: done
 - [x] **Implement AI_SPINNER_ENABLED env var check** — Create `isEnabledByEnv(): boolean | undefined` that reads `AI_SPINNER_ENABLED` and returns `true`, `false`, or `undefined` (not set). | Status: done
-- [ ] **Write terminal.test.ts** — Test TTY detection with mock streams (isTTY true/false). Test color detection with various env var combinations (`NO_COLOR`, `FORCE_COLOR=0`, `FORCE_COLOR=1`). Test CI detection. Test `getColumns` with mock stream columns. Test `AI_SPINNER_ENABLED` parsing. | Status: not_done
+- [x] **Write terminal.test.ts** — Test TTY detection with mock streams (isTTY true/false). Test color detection with various env var combinations (`NO_COLOR`, `FORCE_COLOR=0`, `FORCE_COLOR=1`). Test CI detection. Test `getColumns` with mock stream columns. Test `AI_SPINNER_ENABLED` parsing. | Status: done
 
 ---
 
@@ -74,7 +74,7 @@ This file contains all tasks required to implement `ai-spinner` as described in 
 - [x] **Implement line truncation** — Truncate the rendered line to fit within `stream.columns` by cutting with an ellipsis character when the line exceeds terminal width. | Status: done
 - [x] **Implement cursor management** — Implement helper functions for cursor hide (`\x1b[?25l`), cursor show (`\x1b[?25h`), carriage return (`\r`), clear line (`\x1b[2K`), move up (`\x1b[<n>A`), move down (`\x1b[<n>B`). | Status: done
 - [x] **Implement non-TTY rendering** — When the stream is not a TTY, skip cursor management and ANSI codes. Print only start and completion lines as plain text. | Status: done
-- [ ] **Write renderer.test.ts** — Test template parsing and substitution with various templates. Test separator collapsing (omitted placeholders produce no `· ·`). Test ANSI codes present when color=true and absent when color=false. Test line truncation to a specific column width. Test non-TTY mode produces no escape codes. | Status: not_done
+- [x] **Write renderer.test.ts** — Test template parsing and substitution with various templates. Test separator collapsing (omitted placeholders produce no `· ·`). Test ANSI codes present when color=true and absent when color=false. Test line truncation to a specific column width. Test non-TTY mode produces no escape codes. | Status: done
 
 ---
 
@@ -173,15 +173,15 @@ This file contains all tasks required to implement `ai-spinner` as described in 
 
 ## Phase 12: Stream Tests (`src/__tests__/stream.test.ts`)
 
-- [ ] **Test OpenAI stream wrapping** — Create a mock `AsyncIterable` yielding 10 chunks with `choices[0].delta.content`. Wrap with `format: 'openai'`. Consume fully. Verify: spinner transitioned to `streaming`, `metrics.outputTokens === 10`, `metrics.ttftMs` is defined, all chunks yielded unchanged. | Status: not_done
-- [ ] **Test OpenAI usage field extraction** — Add a final chunk with `usage: { prompt_tokens: 50, completion_tokens: 10 }`. Verify `metrics.inputTokens === 50` and `metrics.outputTokens` corrected to 10. | Status: not_done
-- [ ] **Test Anthropic stream wrapping** — Create a mock stream with `message_start`, 5 `content_block_delta` events, and `message_delta`. Wrap with `format: 'anthropic'`. Verify: spinner transitioned, token counts updated, input tokens from `message_start`, output tokens corrected from `message_delta`. | Status: not_done
-- [ ] **Test generic stream wrapping** — Create a mock `AsyncIterable<string>` yielding 5 strings. Wrap with `format: 'text'`. Verify: tokens estimated from string lengths, all values yielded unchanged. | Status: not_done
-- [ ] **Test auto-detection — OpenAI** — Wrap an OpenAI-format stream with `format: 'auto'`. Verify it is detected and processed as OpenAI format. | Status: not_done
-- [ ] **Test auto-detection — Anthropic** — Wrap an Anthropic-format stream with `format: 'auto'`. Verify it is detected and processed as Anthropic format. | Status: not_done
-- [ ] **Test auto-detection — generic fallback** — Wrap a plain string stream with `format: 'auto'`. Verify it falls back to generic text processing. | Status: not_done
-- [ ] **Test error propagation** — Create a mock stream that throws after 3 chunks. Wrap and consume. Verify: error propagates to consumer, spinner remains in `streaming` (not auto-transitioned to `error`). | Status: not_done
-- [ ] **Test stream does not auto-succeed** — Wrap a stream and consume it fully. Verify spinner state is still `streaming` (not `complete`). | Status: not_done
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
 
 ---
 
@@ -243,16 +243,16 @@ This file contains all tasks required to implement `ai-spinner` as described in 
 
 ## Phase 17: Rendering Tests (`src/__tests__/renderer.test.ts`)
 
-- [ ] **Test TTY mode output** — Verify output contains cursor hide, cursor show, line clear, and carriage return escape codes. | Status: not_done
-- [ ] **Test non-TTY mode output** — Verify no escape codes are present. Verify only start and completion lines are written. | Status: not_done
-- [ ] **Test color enabled output** — Verify ANSI color codes are present in output when color=true. | Status: not_done
-- [ ] **Test color disabled output** — Verify no ANSI color codes in output when color=false. | Status: not_done
-- [ ] **Test NO_COLOR env var** — Set `NO_COLOR=1`. Verify colors are disabled. | Status: not_done
-- [ ] **Test FORCE_COLOR=0 env var** — Set `FORCE_COLOR=0`. Verify colors are disabled. | Status: not_done
-- [ ] **Test line truncation** — Set `stream.columns=40`. Render a line >80 chars. Verify output is truncated to 40 chars with ellipsis. | Status: not_done
-- [ ] **Test format template rendering** — Template `'{spinner} {text} {tokens}'` with 142 tokens: verify output is `'⠋ Working... 142 tokens'`. | Status: not_done
-- [ ] **Test omitted placeholder with separator collapsing** — Template `'{spinner} {text} {tokens} · {cost}'` with no cost: verify output is `'⠋ Working... 142 tokens'` (cost and its separator omitted, no trailing `·`). | Status: not_done
-- [ ] **Test complete format rendering** — Template `'{symbol} {text} · {tokens} · {elapsed}'` in complete state: verify output is `'✓ Done · 142 tokens · 2.1s'`. | Status: not_done
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
 
 ---
 

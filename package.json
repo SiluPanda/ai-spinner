@@ -1,6 +1,6 @@
 {
   "name": "ai-spinner",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "AI-aware terminal progress indicators with token and cost display",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
