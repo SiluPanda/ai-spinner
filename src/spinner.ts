@@ -247,6 +247,7 @@ class AISpinnerImpl implements AISpinner {
         this._stopCountdown();
       }
     }, 1000);
+    if (this._countdownTimer.unref) this._countdownTimer.unref();
 
     // Store reason for display if provided
     if (options?.reason) {
@@ -346,6 +347,7 @@ class AISpinnerImpl implements AISpinner {
   private _startRenderLoop(): void {
     this._stopRenderLoop();
     this._renderTimer = setInterval(() => this._render(), this._interval);
+    if (this._renderTimer.unref) this._renderTimer.unref();
     // Render immediately
     this._render();
   }
